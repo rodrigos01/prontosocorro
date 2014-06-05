@@ -2,6 +2,7 @@ package supermercado;
 
 public interface QueueTAD<E>
 {
+    public static Acumulador statComprimentosFila = new Acumulador();
     void add(E element);
     E remove();
     int size();

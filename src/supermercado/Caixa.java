@@ -3,17 +3,55 @@ package supermercado;
 public class Caixa
 {
 	private Cliente clienteAtual; //cliente sendo atendido no caixa
+	private QueueTAD<Cliente> filaIn;
+	private QueueTAD<Cliente> filaOut;
 	private int numeroAtendidos;
+	public static Acumulador statTemposEsperaFila;
 
-	public Caixa()
+	public Caixa(QueueTAD<Cliente> fila)
 	{
 	    clienteAtual = null;
 	    numeroAtendidos = 0;
+	    this.filaIn = fila;
+	    statTemposEsperaFila = new Acumulador();
+	}
+	
+	public Caixa()
+	{
+		this(new QueueLinked<Cliente>());	
+	}
+	
+	public void rodar() {
+		//verificar se o caixa esta vazio
+        if(this.estaVazio())
+        {
+            //se o this esta vazio, atender o primeiro cliente da fila se ele existir
+            if(filaIn.isEmpty())
+            {
+                //tirar o cliente do inicio da fila e atender no caixa
+                atenderNovoCliente();
+                statTemposEsperaFila.adicionar(Timer.tempo - getClienteAtual().getInstanteChegada());
+                System.out.println(Timer.tempo+": cliente " + getClienteAtual().getNumero() + " chega ao caixa.");
+            }
+        }
+        else
+        {
+            //se o caixa ja esta ocupado, diminuir de um em um o tempo de atendimento ate chegar a zero
+            if(clienteAtual.getTempoAtendimento() == 0)
+            {    
+                System.out.println(Timer.tempo+": cliente " + getClienteAtual().getNumero() + " deixa o caixa.");
+                dispensarClienteAtual();
+            }
+            else
+            {
+                getClienteAtual().decrementarTempoAtendimento();
+            }
+        }
 	}
 
-	public void atenderNovoCliente(Cliente c)
+	public void atenderNovoCliente()
 	{
-	    clienteAtual = c;
+	    clienteAtual = filaIn.remove();
 	}
 	
 	public Cliente dispensarClienteAtual()
@@ -21,6 +59,9 @@ public class Caixa
 	    Cliente c = clienteAtual;
 	    clienteAtual = null;
 	    numeroAtendidos++;
+	    if(filaOut != null) {
+	    	filaOut.add(c);
+	    }
 	    return c;
 	}
 	
@@ -38,4 +79,24 @@ public class Caixa
 	{
 	    return numeroAtendidos;
 	}
+
+	public QueueTAD<Cliente> getFilaIn() {
+		return filaIn;
+	}
+
+	public void setFilaIn(QueueTAD<Cliente> filaIn) {
+		this.filaIn = filaIn;
+	}
+
+	public QueueTAD<Cliente> getFilaOut() {
+		return filaOut;
+	}
+
+	public void setFilaOut(QueueTAD<Cliente> filaOut) {
+		this.filaOut = filaOut;
+	}
+	
+	
+	
+	
 }

@@ -55,7 +55,9 @@ public class QueueLinked<E> implements QueueTAD<E>
         else
            tail.next = n;
         tail = n;
-        count++;        
+        count++;     
+        
+        statComprimentosFila.adicionar(size());
     }
     
     public E remove()
