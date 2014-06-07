@@ -1,4 +1,6 @@
-package supermercado;
+package simulador;
+
+import java.util.ArrayList;
 
 /*
  * Classe com a logica da simulacao passo-a-passo
@@ -8,15 +10,25 @@ public class Simulacao
     private static final int duracao = 200;
     private static final double probabilidadeChegada = 0.1;
     private QueueTAD<Cliente> fila;
-    private Caixa caixa;
+    private ArrayList<Atendente> caixas;
     private GeradorClientes geradorClientes;
     private boolean trace; //valor indica se a simulacao ira imprimir passo-a-passo os resultados
     
-    public Simulacao(boolean t)
+    public Simulacao(Atendente caixa, GeradorClientes fonte)
     {
-        fila = new QueueLinked<Cliente>();
-        caixa = new Caixa();
-        geradorClientes = new GeradorClientes(probabilidadeChegada);
+    	caixas = new ArrayList<Atendente>();
+        caixas.add(caixa);
+        fila = caixa.getFilaIn(); //remover depois
+        geradorClientes = fonte;
+    }
+    
+    public Simulacao(boolean t) {
+    	this(new Atendente(), new GeradorClientes(probabilidadeChegada));
+    	trace = t;
+    }
+    
+    public void addCaixa(Atendente caixa) {
+    	caixas.add(caixa);
     }
     
     public void simular()
@@ -34,20 +46,15 @@ public class Simulacao
                     System.out.println(Timer.tempo + ": cliente " + c.getNumero() + " ("+c.getTempoAtendimento()+" min) entra na fila - " + fila.size() + " pessoa(s)");
             }
             Timer.tempo++;
+            for(Atendente caixaTemp: caixas) {
+            	caixaTemp.trabalhar();
+            }
         }
-    }
-    
-    public void limpar()
-    {
-        fila = new QueueLinked<Cliente>();
-        caixa = new Caixa();
-        geradorClientes = new GeradorClientes(probabilidadeChegada);
-        Timer.tempo = 0;
     }
     
     public void imprimirResultados()
     {
-        System.out.println();
+        /*System.out.println();
         System.out.println("Resultados da Simulacao");
         System.out.println("Duracao:" + duracao);
         System.out.println("Probabilidade de chegada de clientes:" + probabilidadeChegada);
@@ -58,6 +65,6 @@ public class Simulacao
         System.out.println("Cliente ainda no caixa:" + (caixa.getClienteAtual() != null));
         System.out.println("Total de clientes gerados:" + geradorClientes.getQuantidadeGerada());
         System.out.println("Tempo medio de espera:" + Caixa.statTemposEsperaFila.getMedia());
-        System.out.println("Comprimento medio da fila:" + QueueTAD.statComprimentosFila.getMedia());
+        System.out.println("Comprimento medio da fila:" + QueueTAD.statComprimentosFila.getMedia());*/
     }
 }

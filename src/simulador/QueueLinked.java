@@ -1,4 +1,5 @@
-package supermercado;
+package simulador;
+
 
 public class QueueLinked<E> implements QueueTAD<E>
 {

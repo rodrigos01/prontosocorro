@@ -1,5 +1,7 @@
 package supermercado;
 
+import simulador.Simulacao;
+
 /*
  * Programa principal da simulacao
  */

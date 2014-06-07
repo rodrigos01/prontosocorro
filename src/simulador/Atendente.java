@@ -1,6 +1,7 @@
-package supermercado;
+package simulador;
 
-public class Caixa
+
+public class Atendente
 {
 	private Cliente clienteAtual; //cliente sendo atendido no caixa
 	private QueueTAD<Cliente> filaIn;
@@ -8,7 +9,7 @@ public class Caixa
 	private int numeroAtendidos;
 	public static Acumulador statTemposEsperaFila;
 
-	public Caixa(QueueTAD<Cliente> fila)
+	public Atendente(QueueTAD<Cliente> fila)
 	{
 	    clienteAtual = null;
 	    numeroAtendidos = 0;
@@ -16,17 +17,17 @@ public class Caixa
 	    statTemposEsperaFila = new Acumulador();
 	}
 	
-	public Caixa()
+	public Atendente()
 	{
 		this(new QueueLinked<Cliente>());	
 	}
 	
-	public void rodar() {
+	public void trabalhar() {
 		//verificar se o caixa esta vazio
         if(this.estaVazio())
         {
-            //se o this esta vazio, atender o primeiro cliente da fila se ele existir
-            if(filaIn.isEmpty())
+            //se o caixa esta vazio, atender o primeiro cliente da fila se ele existir
+            if(!filaIn.isEmpty())
             {
                 //tirar o cliente do inicio da fila e atender no caixa
                 atenderNovoCliente();
