@@ -1,4 +1,4 @@
-package supermercado;
+package simulador;
 
 import java.util.Random;
 

@@ -1,4 +1,5 @@
-package supermercado;
+package simulador;
+
 
 public interface QueueTAD<E>
 {

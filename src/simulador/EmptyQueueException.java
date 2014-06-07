@@ -1,4 +1,4 @@
-package supermercado;
+package simulador;
 
 public class EmptyQueueException extends RuntimeException
 {
