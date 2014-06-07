@@ -54,17 +54,23 @@ public class Simulacao
     
     public void imprimirResultados()
     {
-        /*System.out.println();
+        System.out.println();
         System.out.println("Resultados da Simulacao");
         System.out.println("Duracao:" + duracao);
         System.out.println("Probabilidade de chegada de clientes:" + probabilidadeChegada);
         System.out.println("Tempo de atendimento minimo:" + Cliente.tempoMinAtendimento);
         System.out.println("Tempo de atendimento maximo:" + Cliente.tempoMaxAtendimento);
-        System.out.println("Cliente atendidos:" + caixa.getNumeroAtendidos());
+        System.out.println("Cliente atendidos:" + Atendente.getNumeroAtendidos());
         System.out.println("Clientes ainda na fila:" + fila.size());
-        System.out.println("Cliente ainda no caixa:" + (caixa.getClienteAtual() != null));
+        int clientesRestantes = 0;
+        for(Atendente caixaTemp: caixas) {
+        	if(caixaTemp.getClienteAtual() != null) {
+        		clientesRestantes++;
+        	}
+        }
+        System.out.println("Clientes ainda nos caixas: " + clientesRestantes);
         System.out.println("Total de clientes gerados:" + geradorClientes.getQuantidadeGerada());
-        System.out.println("Tempo medio de espera:" + Caixa.statTemposEsperaFila.getMedia());
-        System.out.println("Comprimento medio da fila:" + QueueTAD.statComprimentosFila.getMedia());*/
+        System.out.println("Tempo medio de espera:" + Atendente.statTemposEsperaFila.getMedia());
+        System.out.println("Comprimento medio da fila:" + QueueTAD.statComprimentosFila.getMedia());
     }
 }
