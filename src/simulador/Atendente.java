@@ -4,12 +4,12 @@ package simulador;
 public class Atendente
 {
 	private Cliente clienteAtual; //cliente sendo atendido no caixa
-	private QueueTAD<Cliente> filaIn;
+	private QueueTAD<? extends Cliente> filaIn;
 	private QueueTAD<Cliente> filaOut;
 	public static int numeroAtendidos;
 	public static Acumulador statTemposEsperaFila;
 
-	public Atendente(QueueTAD<Cliente> fila)
+	public Atendente(QueueTAD<? extends Cliente> fila)
 	{
 	    clienteAtual = null;
 	    numeroAtendidos = 0;
@@ -81,7 +81,7 @@ public class Atendente
 	    return numeroAtendidos;
 	}
 
-	public QueueTAD<Cliente> getFilaIn() {
+	public QueueTAD<? extends Cliente> getFilaIn() {
 		return filaIn;
 	}
 
