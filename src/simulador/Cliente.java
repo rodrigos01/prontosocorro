@@ -2,7 +2,7 @@ package simulador;
 
 import java.util.Random;
 
-public class Cliente
+public class Cliente implements Atendivel
 {
 	private int numero; //numero do cliente
 	private int instanteChegada;
