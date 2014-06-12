@@ -3,7 +3,7 @@ package simulador;
 
 public class QueueLinked<E> implements QueueTAD<E>
 {
-    private static final class Node<E> {
+    protected static final class Node<E> {
         public E element;
         public Node<E> next;
         
@@ -13,9 +13,9 @@ public class QueueLinked<E> implements QueueTAD<E>
         }
     }
 
-    private Node<E> head;
-    private Node<E> tail;
-    private int count;
+    protected Node<E> head;
+    protected Node<E> tail;
+    protected int count;
     
     public QueueLinked()
     {

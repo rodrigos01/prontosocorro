@@ -6,7 +6,7 @@ public class Atendente
 	private Cliente clienteAtual; //cliente sendo atendido no caixa
 	private QueueTAD<Cliente> filaIn;
 	private QueueTAD<Cliente> filaOut;
-	private int numeroAtendidos;
+	public static int numeroAtendidos;
 	public static Acumulador statTemposEsperaFila;
 
 	public Atendente(QueueTAD<Cliente> fila)
@@ -55,7 +55,7 @@ public class Atendente
 	    clienteAtual = filaIn.remove();
 	}
 	
-	public Cliente dispensarClienteAtual()
+	public Atendivel dispensarClienteAtual()
 	{
 	    Cliente c = clienteAtual;
 	    clienteAtual = null;
@@ -71,12 +71,12 @@ public class Atendente
 	    return (clienteAtual == null);
 	}
 	
-	public Cliente getClienteAtual()
+	public Atendivel getClienteAtual()
 	{
 	    return clienteAtual;
 	}
 	
-	public int getNumeroAtendidos()
+	public static int getNumeroAtendidos()
 	{
 	    return numeroAtendidos;
 	}
