@@ -1,15 +1,15 @@
 package simulador;
 
 
-public class Atendente
+public class Atendente <E extends Atendivel>
 {
-	private Cliente clienteAtual; //cliente sendo atendido no caixa
-	private QueueTAD<Cliente> filaIn;
-	private QueueTAD<Cliente> filaOut;
+	protected E clienteAtual; //cliente sendo atendido no caixa
+	private QueueTAD<E> filaIn;
+	private QueueTAD<E> filaOut;
 	public static int numeroAtendidos;
 	public static Acumulador statTemposEsperaFila;
 
-	public Atendente(QueueTAD<Cliente> fila)
+	public Atendente(QueueTAD<E> fila)
 	{
 	    clienteAtual = null;
 	    numeroAtendidos = 0;
@@ -19,7 +19,7 @@ public class Atendente
 	
 	public Atendente()
 	{
-		this(new QueueLinked<Cliente>());	
+		this(new QueueLinked<E>());	
 	}
 	
 	public void trabalhar() {
@@ -55,9 +55,9 @@ public class Atendente
 	    clienteAtual = filaIn.remove();
 	}
 	
-	public Atendivel dispensarClienteAtual()
+	public E dispensarClienteAtual()
 	{
-	    Cliente c = clienteAtual;
+	    E c = clienteAtual;
 	    clienteAtual = null;
 	    numeroAtendidos++;
 	    if(filaOut != null) {
@@ -71,7 +71,7 @@ public class Atendente
 	    return (clienteAtual == null);
 	}
 	
-	public Atendivel getClienteAtual()
+	public E getClienteAtual()
 	{
 	    return clienteAtual;
 	}
@@ -81,19 +81,19 @@ public class Atendente
 	    return numeroAtendidos;
 	}
 
-	public QueueTAD<Cliente> getFilaIn() {
+	public QueueTAD<E> getFilaIn() {
 		return filaIn;
 	}
 
-	public void setFilaIn(QueueTAD<Cliente> filaIn) {
+	public void setFilaIn(QueueTAD<E> filaIn) {
 		this.filaIn = filaIn;
 	}
 
-	public QueueTAD<Cliente> getFilaOut() {
+	public QueueTAD<E> getFilaOut() {
 		return filaOut;
 	}
 
-	public void setFilaOut(QueueTAD<Cliente> filaOut) {
+	public void setFilaOut(QueueTAD<E> filaOut) {
 		this.filaOut = filaOut;
 	}
 	

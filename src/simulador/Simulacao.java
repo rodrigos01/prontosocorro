@@ -9,7 +9,7 @@ public class Simulacao
 {
     private static final int duracao = 200;
     private static final double probabilidadeChegada = 0.1;
-    private QueueTAD<Cliente> fila;
+    private QueueTAD<Atendivel> fila;
     private ArrayList<Atendente> caixas;
     private GeradorClientes geradorClientes;
     private boolean trace; //valor indica se a simulacao ira imprimir passo-a-passo os resultados
@@ -42,8 +42,6 @@ public class Simulacao
                 //se cliente chegou, criar um cliente e inserir na fila do caixa
                 Cliente c = new Cliente(geradorClientes.getQuantidadeGerada(),Timer.tempo);
                 fila.add(c);
-                if(trace)
-                    System.out.println(Timer.tempo + ": cliente " + c.getNumero() + " ("+c.getTempoAtendimento()+" min) entra na fila - " + fila.size() + " pessoa(s)");
             }
             Timer.tempo++;
             for(Atendente caixaTemp: caixas) {
