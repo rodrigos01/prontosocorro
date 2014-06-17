@@ -1,6 +1,5 @@
 package simulador;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 /*
@@ -9,40 +8,37 @@ import java.util.Random;
 public class GeradorClientes
 {
 	 
-	private QueueTAD<Cliente> fila;
-	 private ArrayList<Atendente> caixas;
+	private QueueTAD<Atendivel> fila;
     private double probabilidade;
     private int quantidadeGerada;
     private static final Random gerador = new Random(); //gerador de numeros aleatorios de Java
     
-    public GeradorClientes(double p)
+    public GeradorClientes(QueueTAD<? extends Atendivel> filaSaida, double p)
     {
         probabilidade = p;
+        fila = (QueueTAD<Atendivel>) filaSaida;
         quantidadeGerada = 0;
+    }
+    
+    public GeradorClientes() {
+    	this(new QueueLinked<Atendivel>(), 0.1);
     }
     
     //verificar se um cliente chegou,se cliente chegou, criar um cliente e inserir na fila do caixa
     
-    public  Cliente gerarClientes()
+    public void gerar()
     {
-    	boolean gerado = false;
-           if(gerador.nextDouble() < probabilidade)
-           {
+    	
+       if(gerador.nextDouble() < probabilidade) {
         	
             quantidadeGerada++;
-            gerado = true;
             
-            Cliente c = new Cliente(quantidadeGerada,Timer.tempo);
+            Atendivel c = new Cliente(quantidadeGerada,Timer.tempo); 
+            
             fila.add(c);
-            return c;
-            }
-           Timer.tempo++;
-           for(Atendente caixaTemp: caixas) {
-           	caixaTemp.trabalhar();
-           }
-		return null;
-		
         }
+		
+    }
     
        
     
@@ -50,4 +46,22 @@ public class GeradorClientes
     {
         return quantidadeGerada;
     }
+
+	public QueueTAD<Atendivel> getFila() {
+		return fila;
+	}
+
+	public void setFila(QueueTAD<Atendivel> fila) {
+		this.fila = fila;
+	}
+
+	public double getProbabilidade() {
+		return probabilidade;
+	}
+
+	public void setProbabilidade(double probabilidade) {
+		this.probabilidade = probabilidade;
+	}
+    
+    
 }

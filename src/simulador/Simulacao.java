@@ -23,7 +23,9 @@ public class Simulacao
     }
     
     public Simulacao(boolean t) {
-    	this(new Atendente(), new GeradorClientes(probabilidadeChegada));
+    	this(new Atendente<Atendivel>(), new GeradorClientes());
+    	geradorClientes.setFila(caixas.get(0).getFilaIn());
+    	geradorClientes.setProbabilidade(probabilidadeChegada);
     	trace = t;
     }
     
@@ -37,12 +39,7 @@ public class Simulacao
         while(Timer.tempo<duracao)
         {
             //verificar se um cliente chegou
-            if(geradorClientes.gerar())
-            {
-                //se cliente chegou, criar um cliente e inserir na fila do caixa
-                Cliente c = new Cliente(geradorClientes.getQuantidadeGerada(),Timer.tempo);
-                fila.add(c);
-            }
+        	geradorClientes.gerar();
             Timer.tempo++;
             for(Atendente caixaTemp: caixas) {
             	caixaTemp.trabalhar();

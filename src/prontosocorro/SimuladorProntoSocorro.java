@@ -16,7 +16,7 @@ public class SimuladorProntoSocorro {
 		triagem.setFilaOut(filaAtendimento);
 		Atendente<Priorizavel> medico = new Atendente<Priorizavel>(filaAtendimento);
 
-		Simulacao sim = new Simulacao(triagem, new GeradorClientes(0.1));
+		Simulacao sim = new Simulacao(triagem, new GeradorClientes(triagem.getFilaIn(), 0.1));
 		
 		sim.addCaixa(medico);
 		
