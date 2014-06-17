@@ -8,10 +8,10 @@ import java.util.Random;
 public class GeradorClientes
 {
 	 
-	private QueueTAD<Atendivel> fila;
-    private double probabilidade;
-    private int quantidadeGerada;
-    private static final Random gerador = new Random(); //gerador de numeros aleatorios de Java
+	protected QueueTAD<Atendivel> fila;
+    protected double probabilidade;
+    protected int quantidadeGerada;
+    protected static final Random gerador = new Random(); //gerador de numeros aleatorios de Java
     
     public GeradorClientes(QueueTAD<? extends Atendivel> filaSaida, double p)
     {
@@ -33,14 +33,16 @@ public class GeradorClientes
         	
             quantidadeGerada++;
             
-            Atendivel c = new Cliente(quantidadeGerada,Timer.tempo); 
-            
+            Atendivel c = criar();
             fila.add(c);
+            PrintLog.log(Timer.tempo+": Cliente "+c.getNumero()+" foi adicionado à fila. Recebe o número: "+fila.getCount());
         }
 		
     }
     
-       
+    protected Atendivel criar() {
+    	return new Cliente(quantidadeGerada,Timer.tempo); 
+    }
     
     public int getQuantidadeGerada()
     {

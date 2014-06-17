@@ -17,6 +17,13 @@ public class ClientePriorizavel extends Cliente implements Priorizavel {
 	public void setPrioridade(boolean prioritario) {
 		this.prioritario = prioritario;
 	}
+
+	public static ClientePriorizavel convertAtendivel(Atendivel at) {
+		// TODO Auto-generated method stub
+		ClientePriorizavel cp = new ClientePriorizavel(at.getNumero(), at.getInstanteChegada());
+		return new ClientePriorizavel(at.getNumero(), at.getInstanteChegada());
+		
+	}
 	
 	
 

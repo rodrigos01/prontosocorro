@@ -10,4 +10,5 @@ public interface QueueTAD<E>
     boolean isEmpty();
     void clear();
     E element();
+    int getCount();
 }

@@ -8,13 +8,13 @@ public class AtendenteTriagem extends Atendente<Priorizavel> {
 
 	@Override
 	public Priorizavel getClienteAtual() {
-		// TODO Auto-generated method stub
-		return super.getClienteAtual();
+		return clienteAtual;
 	}
 
 	@Override
 	public Priorizavel dispensarClienteAtual() {
-		this.getClienteAtual().setPrioridade(gerador.nextBoolean());;
+		this.getClienteAtual().setPrioridade(gerador.nextBoolean());
+		this.getClienteAtual().setTempoAtendimento(5,30);
 		return super.dispensarClienteAtual();
 	}
 

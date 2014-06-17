@@ -6,8 +6,10 @@ public class Atendente <E extends Atendivel>
 	protected E clienteAtual; //cliente sendo atendido no caixa
 	private QueueTAD<E> filaIn;
 	private QueueTAD<E> filaOut;
+	private int numero;
 	public static int numeroAtendidos;
 	public static Acumulador statTemposEsperaFila;
+	protected static int counter = 1;
 
 	public Atendente(QueueTAD<E> fila)
 	{
@@ -15,6 +17,7 @@ public class Atendente <E extends Atendivel>
 	    numeroAtendidos = 0;
 	    this.filaIn = fila;
 	    statTemposEsperaFila = new Acumulador();
+	    numero = counter++;
 	}
 	
 	public Atendente()
@@ -32,7 +35,7 @@ public class Atendente <E extends Atendivel>
                 //tirar o cliente do inicio da fila e atender no caixa
                 atenderNovoCliente();
                 statTemposEsperaFila.adicionar(Timer.tempo - getClienteAtual().getInstanteChegada());
-                System.out.println(Timer.tempo+": cliente " + getClienteAtual().getNumero() + " chega ao caixa.");
+                System.out.println(Timer.tempo+": cliente " + getClienteAtual().getNumero() + " chega ao atendente "+getNumero());
             }
         }
         else
@@ -40,7 +43,7 @@ public class Atendente <E extends Atendivel>
             //se o caixa ja esta ocupado, diminuir de um em um o tempo de atendimento ate chegar a zero
             if(clienteAtual.getTempoAtendimento() == 0)
             {    
-                System.out.println(Timer.tempo+": cliente " + getClienteAtual().getNumero() + " deixa o caixa.");
+                System.out.println(Timer.tempo+": cliente " + getClienteAtual().getNumero() + " deixa o atendente "+getNumero());
                 dispensarClienteAtual();
             }
             else
@@ -96,8 +99,9 @@ public class Atendente <E extends Atendivel>
 	public void setFilaOut(QueueTAD<E> filaOut) {
 		this.filaOut = filaOut;
 	}
-	
-	
-	
+
+	public int getNumero() {
+		return numero;
+	}
 	
 }

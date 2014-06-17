@@ -53,8 +53,8 @@ public class Simulacao
         System.out.println("Resultados da Simulacao");
         System.out.println("Duracao:" + duracao);
         System.out.println("Probabilidade de chegada de clientes:" + probabilidadeChegada);
-        System.out.println("Tempo de atendimento minimo:" + Cliente.tempoMinAtendimento);
-        System.out.println("Tempo de atendimento maximo:" + Cliente.tempoMaxAtendimento);
+        //System.out.println("Tempo de atendimento minimo:" + Cliente.tempoMinAtendimento);
+        //System.out.println("Tempo de atendimento maximo:" + Cliente.tempoMaxAtendimento);
         System.out.println("Cliente atendidos:" + Atendente.getNumeroAtendidos());
         System.out.println("Clientes ainda na fila:" + fila.size());
         int clientesRestantes = 0;

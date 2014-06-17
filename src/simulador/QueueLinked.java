@@ -58,8 +58,6 @@ public class QueueLinked<E> implements QueueTAD<E>
         tail = n;
         count++;
         
-        PrintLog.log("Um item foi adicionado à fila. Recebe o número: "+count);
-        
         statComprimentosFila.adicionar(size());
     }
     
@@ -77,4 +75,8 @@ public class QueueLinked<E> implements QueueTAD<E>
         count--;
         return item;            
     }    
+    
+    public int getCount() {
+    	return count;
+    }
 }

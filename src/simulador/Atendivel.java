@@ -9,4 +9,8 @@ public interface Atendivel {
 	public void decrementarTempoAtendimento();
 	
 	public int getTempoAtendimento();
+	
+	public void setTempoAtendimento(int tempo);
+	
+	public void setTempoAtendimento(int tempoMinAtendimento, int tempoMaxAtendimento);
 }

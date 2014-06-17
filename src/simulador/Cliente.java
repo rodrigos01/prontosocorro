@@ -8,14 +8,12 @@ public class Cliente implements Atendivel
 	private int instanteChegada;
 	private int tempoAtendimento; //quantidade de tempo que resta para o cliente no caixa
 	private static final Random gerador = new Random();
-	public static final int tempoMinAtendimento = 5;
-	public static final int tempoMaxAtendimento = 10;
 
 	public Cliente(int n, int c)
 	{
 	    numero = n;
 	    instanteChegada = c;
-	    tempoAtendimento = gerador.nextInt(tempoMaxAtendimento-tempoMinAtendimento+1)+tempoMinAtendimento; //gera valores entre 5 e 20
+	    setTempoAtendimento(5,10);
 	}
 	
 	public int getNumero()
@@ -36,5 +34,13 @@ public class Cliente implements Atendivel
 	public int getTempoAtendimento()
 	{
 	    return tempoAtendimento;
+	}
+	
+	public void setTempoAtendimento(int tempo) {
+		tempoAtendimento = tempo;
+	}
+
+	public void setTempoAtendimento(int tempoMinAtendimento, int tempoMaxAtendimento) {
+		setTempoAtendimento(gerador.nextInt(tempoMaxAtendimento-tempoMinAtendimento+1)+tempoMinAtendimento); //gera valores entre 5 e 20
 	}
 }
