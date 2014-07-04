@@ -1,4 +1,4 @@
-package prontosocorro;
+/*package prontosocorro;
 
 import static org.junit.Assert.*;
 
@@ -11,4 +11,4 @@ public class prontosocorroteste {
 		fail("Not yet implemented");
 	}
 
-}
+}*/
